@@ -15,6 +15,7 @@ namespace Testing3
         string StockLocation = "Leicester";
         string StockName = "T-shirt";
         string StockPrice = "5";
+        // hi
 
        public string Valid (string StockID, string StockAmount, string StockAvailibility, string StockDate, string StockLocation, string StockName, string StockPrice)
         {
