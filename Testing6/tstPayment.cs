@@ -71,11 +71,11 @@ namespace Testing6
             // Create an instance of the class we want to test
             clsPayment payment = new clsPayment();
 
-            // Create some test data
-            string testData = "Paid";
+            bool testData = true;
 
             // Assign the data to the property
             payment.OrderStatus = testData;
+
 
             // Test to see if the two values are the same
             Assert.AreEqual(payment.OrderStatus, testData);
