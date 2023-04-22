@@ -193,6 +193,53 @@ namespace Testing6
             Assert.IsTrue(OK);
         }
 
+        [TestMethod]
+        public void TestOrderStatusFound()
+        {
+            //create an instance of the class we want to test
+            clsPayment aPayment = new clsPayment();
+            //boolean variable to store the result of the search
+            bool Found = false;
+            //create some test data to use with the method
+            int OrderID = 21;
+            //invoke the method
+            Found = aPayment.Find(OrderID);
+            //check the property
+            if (aPayment.OrderStatus != true)
+            {
+                //boolean variable to record if data is OK (assume it is)
+                bool OK = false;
+            }
+            //test to see that the result is correct
+
+        }
+
+        [TestMethod]
+        public void TestTotalAmountFound()
+        {
+            // create an instance of the class we want to test
+            clsPayment aPayment = new clsPayment();
+
+            // boolean variable to store the result of the search
+            bool Found = false;
+
+            // create some test data to use with the method
+            int OrderID = 123;
+
+            // invoke the method
+            Found = aPayment.Find(OrderID);
+
+            // check the TotalAmount property
+            if (aPayment.TotalAmount != 99.99M)
+            {
+                // boolean variable to record if data is OK (assume it is)
+                bool OK = false;
+            }
+
+           
+        }
+
+
 
 
 
