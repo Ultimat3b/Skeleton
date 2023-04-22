@@ -8,12 +8,22 @@ using ClassLibrary;
 
 public partial class _1Viewer : System.Web.UI.Page
 {
-   
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        clsPayment Payment = new clsPayment();
-        Payment = (clsPayment)Session["Payment"];
-        Response.Write(Payment.CustomerID);
+        clsPayment aPayment = new clsPayment();
 
+
+
+        Response.Write(aPayment.OrderID);
+        Response.Write(aPayment.CustomerID);
+        Response.Write(aPayment.TotalAmount);
+        Response.Write(aPayment.OrderDate);
+        Response.Write(aPayment.OrderStatus);
+
+
+        
     }
 }
+
+
