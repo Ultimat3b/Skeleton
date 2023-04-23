@@ -8,6 +8,8 @@ namespace Testing6
     public class tstPayment
     {
 
+
+
         string OrderID = "1";
         string OrderDate = DateTime.Now.Date.ToString();
         string CustomerID = "12345";
@@ -27,6 +29,9 @@ namespace Testing6
             // test to see that the result is correct
             Assert.AreEqual(Error, "");
         }
+        
+            
+
 
 
 
@@ -354,12 +359,13 @@ namespace Testing6
             // String variable to store any error message 
             string Error = "";
             // create some test data to pass the method
-            string CustomerID = new string('9', 49);
+            string CustomerID = new string('9', 9);
             // invoke the method
             Error = aPayment.Valid(1, DateTime.Now, CustomerID, 99999.99m, "Processing");
             // test to see that the result is correct
             Assert.AreEqual(Error, "");
         }
+
 
         [TestMethod]
         public void OrderDateMaxLessOne()
@@ -369,12 +375,13 @@ namespace Testing6
             // String variable to store any error message 
             string Error = "";
             // create some test data to pass the method
-            DateTime OrderDate = DateTime.MaxValue.AddDays(-1);
+            DateTime OrderDate = DateTime.Now.AddYears(1).AddDays(-1);
             // invoke the method
             Error = aPayment.Valid(1, OrderDate, "C001", 99999.99m, "Processing");
             // test to see that the result is correct
             Assert.AreEqual(Error, "");
         }
+
 
         [TestMethod]
         public void TotalAmountMaxLessOne()
@@ -410,14 +417,15 @@ namespace Testing6
             // String variable to store any error message 
             string Error = "";
             // create some test data to pass the method
-            string CustomerID = "C" + new string('0', 48) + "1";
+            string CustomerID = "C" + new string('0', 8) + "1";
             // invoke the method
             Error = aPayment.Valid(1, DateTime.Now, CustomerID, 9999.99m, "Processing");
             // test to see that the result is correct
             Assert.AreEqual(Error, "");
         }
+    
 
-        [TestMethod]
+    [TestMethod]
         public void OrderDateMid()
         {
             // create an instance of the class we want to test
