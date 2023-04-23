@@ -41,10 +41,7 @@ public class clsPayment
         set { mOrderID = value; }
     }
 
-    public string Valid(string orderID, string orderDate, string customerID, string orderStatus, string error)
-    {
-        throw new NotImplementedException();
-    }
+
 
     public bool Find(int orderID)
     {
@@ -105,7 +102,7 @@ public class clsPayment
         {
             Error = Error + "The customer ID should not be left blank : ";
         }
-        if (CustomerID.Length > 10)
+        else if (CustomerID.Length > 10)
         {
             Error = Error + "The customer ID should not be more than 10 characters : ";
         }
@@ -138,4 +135,5 @@ public class clsPayment
 
         return Error;
     }
+
 }

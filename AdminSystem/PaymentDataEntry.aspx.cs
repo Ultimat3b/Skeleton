@@ -9,48 +9,45 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
-   
+
 
     protected void btnOK_Click(object sender, EventArgs e)
     {
-        // create new instance of clsAdress
+
+       
+
+        // create new instance of clsPayment
         clsPayment aPayment = new clsPayment();
 
+        // capture the input values
+        int OrderID = Convert.ToInt32(txtOrderID.Text);
+        DateTime OrderDate = Convert.ToDateTime(txtOrderDate.Text);
+        decimal TotalAmount = Convert.ToDecimal(txtTotalAmount.Text);
+        string OrderStatus = chkOrderStatus.Text;
+        string CustomerID = txtCustomerID.Text;
 
-        // capture the StockName ect
-        string Name = txtOrderID.Text;
-        string Date = txtOrderDate.Text;
-        string Amount = txtTotalAmount.Text;
-   
-        string Availability = chkOrderStatus.Text;
-        string Customer = txtCustomerID.Text;
-        // variable to store any error messages
-        string Error = "";
-        // validate the data
+        // validate the input values
+        string Error = aPayment.Valid(OrderID, OrderDate, CustomerID, TotalAmount, OrderStatus);
+
         if (Error == "")
         {
-            //capture the Name
-            aPayment.OrderID = Convert.ToInt32(Name);
-            //capture the Date
-            aPayment.OrderDate = Convert.ToDateTime(Date);
-          
-            aPayment.TotalAmount = Convert.ToInt32(Amount);
-            aPayment.CustomerID = Convert.ToInt32(Customer);
+            // set the properties of the clsPayment object
+            aPayment.OrderID = OrderID;
+            aPayment.OrderDate = OrderDate;
+            aPayment.TotalAmount = TotalAmount;
+            aPayment.OrderStatus = (OrderStatus == "Yes");
 
-
-
+            // redirect to PaymentViewer.aspx page
             Response.Redirect("PaymentViewer.aspx");
         }
         else
-     
         {
-            //display the error message
+            // display the error message
             lblError.Text = Error;
         }
-
     }
 
-   
+
 
 
     protected void btnCancel_Click(object sender, EventArgs e)
