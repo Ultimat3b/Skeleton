@@ -41,7 +41,7 @@ public class clsPayment
         set { mOrderID = value; }
     }
 
-
+    public int PaymentID { get; set; }
 
     public bool Find(int orderID)
     {
