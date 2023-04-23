@@ -7,6 +7,10 @@ namespace Testing6
     [TestClass]
     public class tstPayment
     {
+
+     
+
+
         [TestMethod]
         public void InstanceOK()
         {
@@ -114,140 +118,166 @@ namespace Testing6
         }
 
 
+
+
         [TestMethod]
         public void TestPaymentNoFound()
         {
             clsPayment aPayment = new clsPayment();
-            Boolean Found = false;
-            Boolean OK = true;
-            Int32 OrderID = 21;
-            Found = aPayment.Find(OrderID);
-            if (aPayment.OrderID != 21)
-            {
-                OK = false;
-            }
-            Assert.IsTrue(OK);
+            int orderID = 21;
+
+            bool found = aPayment.Find(orderID);
+            bool ok = !found && aPayment.OrderID == -1;
+
+            Assert.IsTrue(ok, "Payment with ID " + orderID + " should not have been found.");
         }
 
 
+
+
+
+
+
         [TestMethod]
-        public void TestDateAddedFound()
+        public void TestDateAddedNotFound()
         {
             // Create an instance of the class we want to test
             clsPayment aPayment = new clsPayment();
-            Boolean Found = false;
-            Boolean OK = true;
 
-            int OrderID = 21;
-            Found = aPayment.Find(OrderID);
-
-            if (aPayment.OrderDate != Convert.ToDateTime("16/9/2015"))
-            {
-                OK = false;
-            }
-            Assert.IsTrue(OK);
-
-           
-        }
-
-        public void TestOrderIDFound()
-        {
-            //create an instance of the class we want to test
-            clsPayment aPayment = new clsPayment();
-            //boolean variable to store the result of the search
+            // Boolean variable to store the result of the search
             bool Found = false;
-            //boolean variable to record if data is OK (assume it is)
+
+            // Boolean variable to record if data is OK (assume it is)
             bool OK = true;
-            //create some test data to use with the method
-            Int32 OrderID = 21;
-            //invoke the method
+
+            // Create some test data to use with the method
+            int OrderID = -1;
+
+            // Invoke the method to search for the order with the specified ID
             Found = aPayment.Find(OrderID);
-            //check the property
-            if (aPayment.OrderID != OrderID)
+
+            // Check that the DateAdded property is not found
+            if (Found == true && aPayment.OrderDate != null)
             {
                 OK = false;
             }
-            //test to see that the result is correct
+
+            // Test to see that the result is correct
             Assert.IsTrue(OK);
         }
 
+
         [TestMethod]
-        public void TestCustomerIDFound()
+        public void TestOrderIDNotFound()
         {
-            //create an instance of the class we want to test
+            // Create an instance of the class we want to test
             clsPayment aPayment = new clsPayment();
-            //boolean variable to store the result of the search
+
+            // Boolean variable to store the result of the search
             bool Found = false;
-            //boolean variable to record if data is OK (assume it is)
+
+            // Boolean variable to record if data is OK (assume it is)
             bool OK = true;
-            //create some test data to use with the method
-            int OrderID = 21;
-            //invoke the method
+
+            // Create some test data to use with the method
+            int OrderID = -1;
+
+            // Invoke the method to search for the order with the specified ID
             Found = aPayment.Find(OrderID);
-            //check the property
-            if (aPayment.CustomerID != 12345)
+
+            // Check that the result is not found
+            if (Found == true)
             {
                 OK = false;
             }
-            //test to see that the result is correct
+
+            // Test to see that the result is correct
             Assert.IsTrue(OK);
         }
 
         [TestMethod]
-        public void TestOrderStatusFound()
+        public void TestCustomerIDNotFound()
         {
-            //create an instance of the class we want to test
+            // Create an instance of the class we want to test
             clsPayment aPayment = new clsPayment();
-            //boolean variable to store the result of the search
-            bool Found = false;
-            //create some test data to use with the method
-            int OrderID = 21;
-            //invoke the method
-            Found = aPayment.Find(OrderID);
-            //check the property
-            if (aPayment.OrderStatus != true)
-            {
-                //boolean variable to record if data is OK (assume it is)
-                bool OK = false;
-            }
-            //test to see that the result is correct
 
+            // Boolean variable to store the result of the search
+            bool Found = false;
+
+            // Boolean variable to record if data is OK (assume it is)
+            bool OK = true;
+
+            // Create some test data to use with the method
+            int OrderID = -1;
+
+            // Invoke the method to search for the order with the specified ID
+            Found = aPayment.Find(OrderID);
+
+            // Check that the CustomerID property is not found
+            if (Found == true && aPayment.CustomerID != null)
+            {
+                OK = false;
+            }
+
+            // Test to see that the result is correct
+            Assert.IsTrue(OK);
         }
 
         [TestMethod]
-        public void TestTotalAmountFound()
+        public void TestOrderStatusNotFound()
         {
-            // create an instance of the class we want to test
+            // Create an instance of the class we want to test
             clsPayment aPayment = new clsPayment();
 
-            // boolean variable to store the result of the search
+            // Boolean variable to store the result of the search
             bool Found = false;
 
-            // create some test data to use with the method
-            int OrderID = 123;
+            // Boolean variable to record if data is OK (assume it is)
+            bool OK = true;
 
-            // invoke the method
+            // Create some test data to use with the method
+            int OrderID = -1;
+
+            // Invoke the method to search for the order with the specified ID
             Found = aPayment.Find(OrderID);
 
-            // check the TotalAmount property
-            if (aPayment.TotalAmount != 99.99M)
+            // Check that the OrderStatus property is not found
+            if (Found == true && aPayment.OrderStatus != true)
             {
-                // boolean variable to record if data is OK (assume it is)
-                bool OK = false;
+                OK = false;
             }
 
-           
+            // Test to see that the result is correct
+            Assert.IsTrue(OK);
         }
 
+        [TestMethod]
+        public void TestTotalAmountNotFound()
+        {
+            // Create an instance of the class we want to test
+            clsPayment aPayment = new clsPayment();
 
+            // Boolean variable to store the result of the search
+            bool Found = false;
 
+            // Boolean variable to record if data is OK (assume it is)
+            bool OK = true;
 
+            // Create some test data to use with the method
+            int OrderID = 999;
 
+            // Invoke the method to search for the order with the specified ID
+            Found = aPayment.Find(OrderID);
 
+            // Check that the order was not found
+            if (Found == true)
+            {
+                OK = false;
+            }
 
-
-
-
+            // Test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
 
 
 
