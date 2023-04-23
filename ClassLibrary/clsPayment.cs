@@ -41,6 +41,11 @@ public class clsPayment
         set { mOrderID = value; }
     }
 
+    public string Valid(string orderID, string orderDate, string customerID, string orderStatus, string error)
+    {
+        throw new NotImplementedException();
+    }
+
     public bool Find(int orderID)
     {
         clsDataConnection DB = new clsDataConnection();
@@ -61,15 +66,76 @@ public class clsPayment
             return false;
         }
     }
+    public string Valid(int OrderID, DateTime OrderDate, string CustomerID, decimal TotalAmount, string OrderStatus)
+    {
+        string Error = "";
+        DateTime DateTemp;
+        decimal AmountTemp;
 
+        try
+        {
+            if (OrderID < 0)
+            {
+                Error = Error + "The order ID must be at least 0 : ";
+            }
+        }
+        catch (OverflowException)
+        {
+            Error = Error + "The order ID is too high : ";
+        }
 
+        try
+        {
+            DateTemp = OrderDate;
+            if (DateTemp < DateTime.Now.Date)
+            {
+                Error = Error + "The order date cannot be in the past : ";
+            }
+            else if (DateTemp > DateTime.Now.Date.AddYears(1))
+            {
+                Error = Error + "The order date cannot be more than one year in the future : ";
+            }
+        }
+        catch
+        {
+            Error = Error + "The order date was not a valid date : ";
+        }
+
+        if (string.IsNullOrWhiteSpace(CustomerID))
+        {
+            Error = Error + "The customer ID should not be left blank : ";
+        }
+        if (CustomerID.Length > 10)
+        {
+            Error = Error + "The customer ID should not be more than 10 characters : ";
+        }
+
+        try
+        {
+            AmountTemp = TotalAmount;
+            if (AmountTemp < 0)
+            {
+                Error = Error + "The total amount cannot be negative : ";
+            }
+            if (AmountTemp > 1000000.00m)
+            {
+                Error = Error + "The total amount must be below 1000000.00 : ";
+            }
+        }
+        catch
+        {
+            Error = Error + "The total amount was not a valid number : ";
+        }
+
+        if (string.IsNullOrWhiteSpace(OrderStatus))
+        {
+            Error = Error + "The order status should not be left blank : ";
+        }
+        if (OrderStatus.Length > 50)
+        {
+            Error = Error + "The order status should not be more than 50 characters : ";
+        }
+
+        return Error;
+    }
 }
-
-
-
-
-
-
-
-
-
