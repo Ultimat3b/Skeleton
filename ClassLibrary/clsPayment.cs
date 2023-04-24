@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class clsPayment
 {
@@ -136,4 +137,8 @@ public class clsPayment
         return Error;
     }
 
+    public static implicit operator List<object>(clsPayment v)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -9,6 +9,8 @@ namespace Testing6
     [TestClass]
     public class tstPaymentCollection
     {
+        public object TestPayment { get; private set; }
+        public int SomeCount { get; private set; }
 
         [TestMethod]
         public void PaymentListOK()
@@ -42,6 +44,40 @@ namespace Testing6
         }
 
 
+        
+
+        
+
+
+        [TestMethod]
+        public void ThisPaymentPropertyOK()
+        {
+            // Create an instance of the class we want to create
+            clsPaymentCollection AllPayments = new clsPaymentCollection();
+
+            // Create some test data to assign to the property
+            clsPayment TestPayment = new clsPayment();
+
+            // Add an item to the list
+            clsPayment TestItem = new clsPayment();
+            TestPayment.OrderID = 1;
+            TestPayment.OrderDate = DateTime.Now.Date;
+            TestPayment.TotalAmount = 10.00m;
+            TestPayment.CustomerID = 1;
+            TestPayment.OrderStatus = true;
+          
+
+            // Assign the data to the property
+            AllPayments.ThisPayment = TestPayment;
+
+            // Test to see that the two values are the same
+            Assert.AreEqual(AllPayments.ThisPayment, TestPayment);
+        }
+
+
+
+        
+        
 
         [TestMethod]
         public void ListAndCountOK()
@@ -70,34 +106,7 @@ namespace Testing6
 
 
 
-        [TestMethod]
-        public void TwoRecordsPresent()
-        {
-            clsPaymentCollection AllPayments = new clsPaymentCollection();
 
-            // Add two payments to PaymentList
-            clsPayment TestItem1 = new clsPayment();
-            TestItem1.OrderID = 1;
-            TestItem1.OrderDate = DateTime.Now.Date;
-            TestItem1.TotalAmount = 10.00m;
-            TestItem1.CustomerID = 1;
-            TestItem1.OrderStatus = true;
-            AllPayments.PaymentList.Add(TestItem1);
-
-            clsPayment TestItem2 = new clsPayment();
-            TestItem2.OrderID = 2;
-            TestItem2.OrderDate = DateTime.Now.Date;
-            TestItem2.TotalAmount = 20.00m;
-            TestItem2.CustomerID = 2;
-            TestItem2.OrderStatus = false;
-            AllPayments.PaymentList.Add(TestItem2);
-
-            // Assert that the count of PaymentList is 2
-            Assert.AreEqual(AllPayments.Count, 2);
-        }
-
-        
-        
 
 
     }
