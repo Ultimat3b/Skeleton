@@ -14,6 +14,8 @@
             
         </div>
         
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" style="z-index: 1; left: 16px; top: 362px; position: absolute" Text="Button" />
+        
     </form>
 </body>
 </html>

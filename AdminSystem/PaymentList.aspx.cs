@@ -32,6 +32,15 @@ public partial class _1_List : System.Web.UI.Page
         lstPaymentList.DataTextField = "CustomerID";
         lstPaymentList.DataBind();
     }
+
+
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Session["OrderID"] = -1;
+        //redirect to the data entry page
+        Response.Redirect("PaymentDataEntry.aspx");
+    }
 }
 
 

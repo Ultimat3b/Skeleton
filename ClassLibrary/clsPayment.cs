@@ -51,11 +51,11 @@ public class clsPayment
         DB.Execute("sproc_tblPaymentProcess_FilterByorderID");
         if (DB.Count == 1)
         {
-            mOrderStatus = Convert.ToBoolean(DB.DataTable.Rows[0]["Order Status"]);
-            mOrderID = Convert.ToInt32(DB.DataTable.Rows[0]["Order ID"]);
-            mCustomerID = Convert.ToInt32(DB.DataTable.Rows[0]["Customer ID"]);
-            mOrderDate = Convert.ToDateTime(DB.DataTable.Rows[0]["Order Date"]);
-            mTotalAmount = Convert.ToDecimal(DB.DataTable.Rows[0]["Total Amount"]);
+            mOrderStatus = Convert.ToBoolean(DB.DataTable.Rows[0]["OrderStatus"]);
+            mOrderID = Convert.ToInt32(DB.DataTable.Rows[0]["OrderID"]);
+            mCustomerID = Convert.ToInt32(DB.DataTable.Rows[0]["CustomerID"]);
+            mOrderDate = Convert.ToDateTime(DB.DataTable.Rows[0]["OrderDate"]);
+            mTotalAmount = Convert.ToDecimal(DB.DataTable.Rows[0]["TotalAmount"]);
             return true;
         }
         else

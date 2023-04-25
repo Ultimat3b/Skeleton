@@ -44,9 +44,38 @@ namespace Testing6
         }
 
 
-        
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            // Create an instance of the class we want to create
+            clsPaymentCollection AllPayments = new clsPaymentCollection();
 
-        
+            // Create some test data to assign to the property
+            clsPayment TestPayment = new clsPayment();
+            Int32 PrimaryKey = 0;
+            // Add an item to the list
+            clsPayment TestItem = new clsPayment();
+            TestPayment.OrderID = 1;
+            TestPayment.OrderDate = DateTime.Now.Date;
+            TestPayment.TotalAmount = 10.00m;
+            TestPayment.CustomerID = 1;
+            TestPayment.OrderStatus = true;
+
+
+            // Assign the data to the property
+            AllPayments.ThisPayment = TestPayment;
+            PrimaryKey = AllPayments.Add();
+            TestPayment.OrderID = PrimaryKey;
+            AllPayments.ThisPayment.Find(PrimaryKey);
+            // Test to see that the two values are the same
+            Assert.AreEqual(AllPayments.ThisPayment, TestPayment);
+        }
+
+
+
+
+
+
 
 
         [TestMethod]

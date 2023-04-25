@@ -37,6 +37,9 @@ public partial class _1_DataEntry : System.Web.UI.Page
             aPayment.TotalAmount = TotalAmount;
             aPayment.OrderStatus = (OrderStatus == "Yes");
 
+
+            clsPaymentCollection PaymentList = new clsPaymentCollection();
+            PaymentList.Add();
             // redirect to PaymentViewer.aspx page
             Response.Redirect("PaymentViewer.aspx");
         }

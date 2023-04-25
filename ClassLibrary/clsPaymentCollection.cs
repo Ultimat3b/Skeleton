@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ClassLibrary;
+
+using System;
 using System.Collections.Generic;
 
 namespace ClassLibrary
@@ -14,8 +16,8 @@ namespace ClassLibrary
         
       
           
-            List<clsPayment> mPaymentList = new List<clsPayment>();
-
+     List<clsPayment> mPaymentList = new List<clsPayment>();
+        clsPayment mThisPayment = new clsPayment();
         public clsPaymentCollection()
         {
             clsPayment TestItem = new clsPayment();
@@ -46,11 +48,11 @@ namespace ClassLibrary
             while (Index < RecordCount)
             {
                 clsPayment aPayment = new clsPayment();
-                aPayment.OrderStatus = Convert.ToBoolean(DB.DataTable.Rows[0]["Order Status"]);
-                aPayment.OrderID = Convert.ToInt32(DB.DataTable.Rows[0]["Order ID"]);
-                aPayment.CustomerID = Convert.ToInt32(DB.DataTable.Rows[0]["Customer ID"]);
-                aPayment.OrderDate = Convert.ToDateTime(DB.DataTable.Rows[0]["Order Date"]);
-                aPayment.TotalAmount = Convert.ToDecimal(DB.DataTable.Rows[0]["Total Amount"]);
+                aPayment.OrderStatus = Convert.ToBoolean(DB.DataTable.Rows[Index]["OrderStatus"]);
+                aPayment.OrderID = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
+                aPayment.CustomerID = Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerID"]);
+                aPayment.OrderDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
+                aPayment.TotalAmount = Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalAmount"]);
                 mPaymentList.Add(aPayment);
                 Index++;
             }
@@ -89,15 +91,46 @@ namespace ClassLibrary
         }
 
 
-        public clsPayment ThisPayment { get; set; }
+        public clsPayment ThisPayment
+        {
+            get
+            {
+                return mThisPayment;
+            }
+
+
+            set
+            {
+                mThisPayment = value;
+            }
+        }
 
 
 
 
         public int Add()
         {
-            throw new NotImplementedException();
+            clsDataConnection DB = new clsDataConnection();
+
+            DB.AddParameter("@OrderID", mThisPayment.OrderID);
+            DB.AddParameter("@OrderDate", mThisPayment.OrderDate);
+            DB.AddParameter("@CustomerID", mThisPayment.CustomerID);
+            DB.AddParameter("@TotalAmount", mThisPayment.TotalAmount);
+            DB.AddParameter("@OrderStatus", mThisPayment.OrderStatus);
+            
+            //execute the query returning the primary key value
+            return DB.Execute("sproc_tblPayment_Insert");
+
+
         }
+
+
+                
+
+
+                
+        
+    
 
         public void Delete()
         {
