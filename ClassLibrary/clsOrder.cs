@@ -4,15 +4,24 @@ using System.Collections.Generic;
 public class clsOrder
 {
     private int mOrderID;
+    private int mOrderNumber;
     private DateTime mOrderDate;
     private decimal mTotalAmount;
     private int mCustomerID;
+    private int mProductID;
     private bool mOrderStatus;
+    private DateTime mDispatchDate;
 
     public DateTime OrderDate
     {
         get { return mOrderDate; }
         set { mOrderDate = value; }
+    }
+
+    private DateTime DispatchDate
+    {
+        get { return mDispatchDate; }
+        set { DispatchDate = value; }
     }
 
     public decimal TotalAmount
@@ -33,10 +42,22 @@ public class clsOrder
         set { mCustomerID = value; }
     }
 
+    public int ProductID
+    {
+        get { return mProductID; }
+        set { mProductID = value; }
+    }
+
     public int OrderID
     {
         get { return mOrderID; }
         set { mOrderID = value; }
+    }
+
+    public int OrderNumber
+    {
+        get { return mOrderNumber; }
+        set { mOrderNumber = value; }
     }
 
     public int PaymentID { get; set; }
@@ -53,6 +74,9 @@ public class clsOrder
             mCustomerID = Convert.ToInt32(DB.DataTable.Rows[0]["Customer ID"]);
             mOrderDate = Convert.ToDateTime(DB.DataTable.Rows[0]["Order Date"]);
             mTotalAmount = Convert.ToDecimal(DB.DataTable.Rows[0]["Total Amount"]);
+            mProductID = Convert.ToInt32(DB.DataTable.Rows[0]["Product ID"]);
+            mOrderNumber = Convert.ToInt32(DB.DataTable.Rows[0]["Order Number"]);
+            mDispatchDate = Convert.ToDateTime(DB.DataTable.Rows[0]["Dispatch"]);
             return true;
         }
         else
@@ -62,7 +86,7 @@ public class clsOrder
         }
     }
 
-    public string Valid(int OrderID, DateTime OrderDate, string CustomerID, decimal TotalAmount, string OrderStatus)
+    public string Valid(int OrderID, DateTime OrderDate, string CustomerID, decimal TotalAmount, string OrderStatus )
     {
         string Error = "";
         DateTime DateTemp;
