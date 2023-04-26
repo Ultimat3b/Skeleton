@@ -6,61 +6,30 @@ using System.Collections.Generic;
 namespace ClassLibrary
 {
 
-    
+
 
 
 
     public class clsPaymentCollection
     {
 
-       
-      
-          
-     List<clsPayment> mPaymentList = new List<clsPayment>();
+
+
+
+        List<clsPayment> mPaymentList = new List<clsPayment>();
         clsPayment mThisPayment = new clsPayment();
         public clsPaymentCollection()
         {
-            clsPayment TestItem = new clsPayment();
-            TestItem.OrderID = 1;
-            TestItem.OrderDate = DateTime.Now.Date;
-            TestItem.TotalAmount = 10.00m;
-            TestItem.CustomerID = 1;
-            TestItem.OrderStatus = true;
-            mPaymentList.Add(TestItem);
-
-            TestItem = new clsPayment();
-            TestItem.OrderID = 2;
-            TestItem.OrderDate = DateTime.Now.Date;
-            TestItem.TotalAmount = 20.00m;
-            TestItem.CustomerID = 2;
-            TestItem.OrderStatus = false;
-            mPaymentList.Add(TestItem);
-
-
-
-
-            Int32 Index = 0;
-            Int32 RecordCount = 0;
+            
             clsDataConnection DB = new clsDataConnection();
             DB.Execute("sproc_PaymentProcess_SelectAll");
-            RecordCount = DB.Count;
-
-            while (Index < RecordCount)
-            {
-                clsPayment aPayment = new clsPayment();
-                aPayment.OrderStatus = Convert.ToBoolean(DB.DataTable.Rows[Index]["OrderStatus"]);
-                aPayment.OrderID = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderID"]);
-                aPayment.CustomerID = Convert.ToInt32(DB.DataTable.Rows[Index]["CustomerID"]);
-                aPayment.OrderDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
-                aPayment.TotalAmount = Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalAmount"]);
-                mPaymentList.Add(aPayment);
-                Index++;
-            }
+            PopulateArray(DB);
+            
         }
 
 
 
-       
+
         public List<clsPayment> PaymentList
         {
             get
@@ -146,22 +115,31 @@ namespace ClassLibrary
             clsDataConnection DB = new clsDataConnection();
 
             DB.AddParameter("@OrderID", mThisPayment.OrderID);
-            
+
             // execute the query returning the primary key value
             DB.Execute("sproc_tblPayment_Delete");
         }
 
-        
+        public void ReportByCustomerID(string CustomerID)
+        {
 
 
-        
+            // connect to the database
+            clsDataConnection DB = new clsDataConnection();
+            // send the CustomerID parameter to the database
+            DB.AddParameter("@CustomerID", CustomerID);
+            // execute the stored procedure
+            Convert.ToInt32(DB.Execute("sproc_tblPayment_FilterByCustomerID"));
+            // populate the array list with the data table
+            PopulateArray(DB);
+        }
 
-        
+        public void ReportByCustomerID(object text)
+        {
+            throw new NotImplementedException();
+        }
 
-
-       
-
-         void PopulateArray1(clsDataConnection DB)
+        void PopulateArray(clsDataConnection DB)
         {
             Int32 Index = 0;
             Int32 RecordCount;

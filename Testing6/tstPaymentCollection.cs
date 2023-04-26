@@ -125,7 +125,7 @@ namespace Testing6
 
 
             PrimaryKey = AllPayments.Add();
-            TestPayment.OrderID =PrimaryKey;
+            TestPayment.OrderID = PrimaryKey;
 
             // Modify the data
             TestPayment.OrderDate = DateTime.Now.AddDays(-1).Date;
@@ -145,7 +145,7 @@ namespace Testing6
         }
 
 
-            [TestMethod]
+        [TestMethod]
         public void ThisPaymentPropertyOK()
         {
             // Create an instance of the class we want to create
@@ -161,7 +161,7 @@ namespace Testing6
             TestPayment.TotalAmount = 10.00m;
             TestPayment.CustomerID = 1;
             TestPayment.OrderStatus = true;
-          
+
 
             // Assign the data to the property
             AllPayments.ThisPayment = TestPayment;
@@ -169,7 +169,7 @@ namespace Testing6
             // Test to see that the two values are the same
             Assert.AreEqual(AllPayments.ThisPayment, TestPayment);
         }
-       
+
 
 
 
@@ -200,12 +200,46 @@ namespace Testing6
             Assert.AreEqual(AllPayments.Count, TestList.Count);
         }
 
+        [TestMethod]
+        public void ReportByCustomerIDMethodOK()
+        {
+            clsPaymentCollection AllPayments = new clsPaymentCollection();
 
-
+            clsPaymentCollection FilteredPayments = new clsPaymentCollection();
+            FilteredPayments.ReportByCustomerID(""); // Pass a valid integer value for the CustomerID parameter
+            Assert.AreEqual(AllPayments.Count, FilteredPayments.Count);
+        }
     
-        
 
-        
+        [TestMethod]
+
+        public void ReportByCustomerIDTestDataFound()
+        {
+            clsPaymentCollection FilteredPayments = new clsPaymentCollection();
+            Boolean OK = true;
+            FilteredPayments.ReportByCustomerID("");
+            if (FilteredPayments.Count == 2)
+            {
+                if(FilteredPayments.PaymentList[0].OrderID !=36)
+                {
+                    OK = false;
+                }
+                
+                if(FilteredPayments.PaymentList[1].OrderID != 37)
+                {
+                    OK = false;
+                }
+                else
+                {
+                    OK = false;
+                }
+                Assert.IsTrue(OK);
+            }
+        }
+
+
+
+
 
 
 
