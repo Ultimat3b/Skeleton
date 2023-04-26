@@ -18,12 +18,12 @@ public partial class _1_List : System.Web.UI.Page
 
         //if this is the first time the page is displayed
         if (IsPostBack == false)
-            {
-                //update the list box
-                DisplayPayments();
-            }
+        {
+            //update the list box
+            DisplayPayments();
         }
-    
+    }
+
 
     void DisplayPayments()
     {
@@ -68,28 +68,57 @@ public partial class _1_List : System.Web.UI.Page
     }
 
     protected void Button3_Click(object sender, EventArgs e)
-    
-        {
-            // var to store the primary key value of the record to be deleted 
-            Int32 StockID;
-            //if the record has been selected from the list
-            if (lstPaymentList.SelectedIndex != -1)
-            {
-                //get the primarykey value of the record to delete
-                OrderID =Convert.ToInt32(lstPaymentList.SelectedValue);
-                //store the data in the session object 
-                Session["OrderID"] = OrderID;
-                //redirect to the delete page
-                Response.Redirect("PaymentConfirmDelete.aspx");
-            }
-            else //if no record has been selected
-            {
-                //display an error 
-                lblError.Text = "please select a record a delete from the list";
-            }
-        }
 
-    
+    {
+        // var to store the primary key value of the record to be deleted 
+        Int32 OrderID;
+        //if the record has been selected from the list
+        if (lstPaymentList.SelectedIndex != -1)
+        {
+            //get the primarykey value of the record to delete
+            OrderID = Convert.ToInt32(lstPaymentList.SelectedValue);
+            //store the data in the session object 
+            Session["OrderID"] = OrderID;
+            //redirect to the delete page
+            Response.Redirect("PaymentConfirmDelete.aspx");
+        }
+        else //if no record has been selected
+        {
+            //display an error 
+            lblError.Text = "please select a record a delete from the list";
+        }
+    }
+
+
+
+    protected void Button4_Click(object sender, EventArgs e)
+    {
+        clsPaymentCollection Payments = new clsPaymentCollection();
+        // set the data source to list of payments in the collection
+        Payments.ReportByCustomerID(txtCustomerID.Text);
+        lstPaymentList.DataSource = Payments.PaymentList;
+        //set the name of the primary key
+        lstPaymentList.DataValueField = "OrderID";
+        //set the data field to display
+        lstPaymentList.DataTextField = "CustomerID";
+        lstPaymentList.DataBind();
+    }
+
+    protected void Button5_Click(object sender, EventArgs e)
+    {
+        //create an instance of the stock collection
+
+        clsPaymentCollection Payments = new clsPaymentCollection();
+        Payments.ReportByCustomerID("");
+        // clear any existing fildter to tidy up the interface
+        txtCustomerID.Text = "";
+        lstPaymentList.DataSource = Payments.PaymentList;
+        //set the name of the primary key
+        lstPaymentList.DataValueField = "OrderID";
+        //set the data field to display
+        lstPaymentList.DataTextField = "CustomerID";
+        lstPaymentList.DataBind();
+    }
 }
 
 
