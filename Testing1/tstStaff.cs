@@ -28,8 +28,8 @@ namespace Testing1
         {
             clsStaff aStaff = new clsStaff();
             DateTime TestData = DateTime.Now.Date;
-            aStaff.Staff_StartDate = TestData;
-            Assert.AreEqual(aStaff.Staff_StartDate, TestData);
+            aStaff.StaffStartTime = TestData;
+            Assert.AreEqual(aStaff.mStaffStartDate, TestData);
         }
 
         [TestMethod]
@@ -38,7 +38,7 @@ namespace Testing1
             clsStaff aStaff = new clsStaff();
             string TestData = "Steve";
             aStaff.Staff_FirstName = TestData;
-            Assert.AreEqual(aStaff.Staff_FirstName, TestData);
+            Assert.AreEqual(aStaff.mStaffFirstName, TestData);
         }
 
         [TestMethod]
@@ -113,5 +113,21 @@ namespace Testing1
             Assert.IsTrue(OK);
         }
 
+        [TestMethod]
+        public void TestFirstName()
+        {
+            clsStaff aStaff = new csStaff();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 mStaffId = 2;
+            Found = aStaff.Find(mStaffId);
+            if (aStaff.mStaffFirstName != "Steve")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
     }
+}
 

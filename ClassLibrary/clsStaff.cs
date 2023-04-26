@@ -4,29 +4,114 @@ namespace ClassLibrary
 {
     public class clsStaff
     {
-        private Int32 mStaff_Id;
-        public Int32 Staff_Id
+        private Int32 mStaffId;
+        private bool mActive;
+        private DateTime mDateAdded;
+        private string mStaffFirstName;
+        private string mStaffSurname;
+        private string mStaffPhoneNumber;
+        private string mStaffEmail;
+        private float mStaffSalary;
+        private DateTime mStaffStartTime;
+        public Int32 StaffId
         {
             get
             {
-                return Staff_Id;
+                return mStaffId;
             }
             set
             {
-                mStaff_Id = value;
+                mStaffId = value;
             }
         }
-        public bool Active { get; set; }
-        public DateTime DateAdded { get; set; }
-        public string Staff_FirstName { get; set; }
-        public object Staff_Firstname { get; set; }
-        public string Staff_Surname { get; set; }
-        public string Staff_PhoneNumber { get; set; }
-        public float Staff_email { get; set; }
-        public string Staff_Email { get; set; }
-        public float Staff_Salary { get; set; }
-        public DateTime Staff_StartDate { get; set; }
-
+        public bool Active
+        {
+            get
+            {
+                return mActive;
+            }
+            set
+            {
+                mActive = value;
+            }
+        }
+        public DateTime DateAdded
+        {
+            get
+            {
+                return mDateAdded;
+            }
+            set
+            {
+                mDateAdded = value;
+            }
+        }
+        public string StaffFirstname
+        {
+            get
+            {
+                return mStaffFirstName;
+            }
+            set
+            {
+                mStaffFirstName = value;
+            }
+        }
+        public string StaffSurname
+        {
+            get
+            {
+                return mStaffSurname;
+            }
+            set
+            {
+                mStaffSurname = value;
+            }
+        }
+        public string StaffPhoneNumber
+        {
+            get
+            {
+                return mStaffPhoneNumber;
+            }
+            set
+            {
+                mStaffPhoneNumber = value;
+            }
+        }
+        public string StaffEmail
+        {
+            get
+            {
+                return mStaffEmail;
+            }
+            set
+            {
+                mStaffEmail = value;
+            }
+        }
+        public float StaffSalary
+        {
+            get
+            {
+                return mStaffSalary;
+            }
+            set
+            {
+                mStaffSalary = value;
+            }
+        }
+        public DateTime StaffStartTime
+        {
+            get
+            {
+                return mStaffStartTime;
+            }
+            set
+            {
+                mStaffStartTime = value;
+            }
+        }
         public bool Find(int staff_Id)
         {
             return true;

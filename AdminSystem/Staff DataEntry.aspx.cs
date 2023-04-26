@@ -18,10 +18,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //create a new instance of clsStaff
         clsStaff aStaff = new clsStaff();
         //capture the staff name
-        aStaff.Staff_Firstname = txtStaffFirstname.Text;
-        aStaff.Staff_Surname = txtSurname.Text;
-        aStaff.Staff_Email = txtEmail.Text;
-        aStaff.Staff_PhoneNumber = txtphoneNumber.Text;
+        aStaff.StaffFirstname = txtStaffFirstname.Text;
+        aStaff.StaffSurname = txtSurname.Text;
+        aStaff.StaffEmail = txtEmail.Text;
+        aStaff.StaffPhoneNumber = txtphoneNumber.Text;
 
         //store the data in the session object
         Session["aStaff"] = aStaff;
