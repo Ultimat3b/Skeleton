@@ -14,7 +14,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
     protected void btnOK_Click(object sender, EventArgs e)
     {
 
-       
 
         // create new instance of clsPayment
         clsPayment aPayment = new clsPayment();
@@ -39,17 +38,33 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
 
             clsPaymentCollection PaymentList = new clsPaymentCollection();
-            PaymentList.Add();
+
+
+            if (OrderID == -1)
+            {
+                PaymentList.ThisPayment = aPayment;
+                PaymentList.Add();
+
+            }
             // redirect to PaymentViewer.aspx page
+
+
+            else
+            {
+                PaymentList.ThisPayment.Find(OrderID);
+                PaymentList.ThisPayment = aPayment;
+                PaymentList.Update();
+
+                // display the error message
+                lblError.Text = Error;
+            }
             Response.Redirect("PaymentViewer.aspx");
         }
         else
         {
-            // display the error message
-            lblError.Text = Error;
+
         }
     }
-
 
 
 

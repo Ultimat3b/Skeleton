@@ -8,18 +8,22 @@ using ClassLibrary;
 
 public partial class _1_List : System.Web.UI.Page
 {
+    Int32 OrderID;
     protected void Page_Load(object sender, EventArgs e)
     {
+
+
         //if this is the first time the page is displayed
-        {
-            //if this is the first time the page is displayed
-            if (IsPostBack == false)
+        OrderID = Convert.ToInt32(Session["OrderID"]);
+
+        //if this is the first time the page is displayed
+        if (IsPostBack == false)
             {
                 //update the list box
                 DisplayPayments();
             }
         }
-    }
+    
 
     void DisplayPayments()
     {
@@ -41,6 +45,51 @@ public partial class _1_List : System.Web.UI.Page
         //redirect to the data entry page
         Response.Redirect("PaymentDataEntry.aspx");
     }
+
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        //var to store the primary key value of the record to be edited
+        Int32 OrderID;
+        //if a record has been selected from the list
+        if (lstPaymentList.SelectedIndex != -1)
+        {
+            //get the primary key value of the record to be edited
+            OrderID = Convert.ToInt32(lstPaymentList.SelectedValue);
+            //store the data in the session object
+            Session["OrderID"] = OrderID;
+            //redirect to the edit page
+            Response.Redirect("PaymentDataEntry.aspx");
+        }
+        else
+        //if no record has been selected
+        {
+            lblError.Text = "Please select other";
+        }
+    }
+
+    protected void Button3_Click(object sender, EventArgs e)
+    
+        {
+            // var to store the primary key value of the record to be deleted 
+            Int32 StockID;
+            //if the record has been selected from the list
+            if (lstPaymentList.SelectedIndex != -1)
+            {
+                //get the primarykey value of the record to delete
+                OrderID =Convert.ToInt32(lstPaymentList.SelectedValue);
+                //store the data in the session object 
+                Session["OrderID"] = OrderID;
+                //redirect to the delete page
+                Response.Redirect("PaymentConfirmDelete.aspx");
+            }
+            else //if no record has been selected
+            {
+                //display an error 
+                lblError.Text = "please select a record a delete from the list";
+            }
+        }
+
+    
 }
 
 
