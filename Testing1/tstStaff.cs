@@ -54,7 +54,7 @@ namespace Testing1
         public void StaffSurnameOK()
         {
             clsStaff aStaff = new clsStaff();
-            string TestData = "gates";
+            string TestData = "Gates";
             aStaff.Staff_Surname = TestData;
             Assert.AreEqual(aStaff.Staff_Surname, TestData);
         }
@@ -114,7 +114,7 @@ namespace Testing1
         }
 
         [TestMethod]
-        public void TestFirstName()
+        public void TestFirstNameFound()
         {
             clsStaff aStaff = new csStaff();
             Boolean Found = false;
@@ -128,6 +128,91 @@ namespace Testing1
             Assert.IsTrue(OK);
         }
 
+        [TestMethod]
+        public void TestActiveFound()
+        {
+            clsStaff aStaff = new clsStaff();
+            Boolean Found = false;
+            Boolean OK = true;
+            int32 StaffId = 2;
+            Found = aStaff.Find(StaffId);
+            if (aStaff.Active != true)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestStartDateFound()
+        {
+            clsStaff aStaff = new clsStaff();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 StaffId = 2;
+            Found = aStaff.Find(StaffId);
+            if (aStaff.StaffStartDate != Convert.ToDateTime("27/04/2023"))
+            {
+                OK = false;
+            }
+            Asseert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestSurnameFound()
+        {
+            clsStaff aStaff = new clsStaff();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 StaffId = 2;
+            Found = aStaff.Find(StaffId);
+            if (aStaff.StaffSurname != "Gates")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestEmailFound()
+        {
+            clsStaff aStaff = new clsStaff();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 StaffId = 2;
+            Found = aStaff.Find(StaffId);
+            if (aStaff.StaffEmail != "SteveGates@gmail.com")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestSalaryFound()
+        {
+            clsStaff aStaff = new clsStaff();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 StaffId = 2;
+            Found = aStaff.Find(StaffId);
+            if (aStaff.StaffSalary != 27000)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK)
+        }
+
+        [TestMethod]
+        public void TestPhoneFound()
+        {
+            clsStaff aStaff = new clsStaff();
+            Boolean Found = false;
+            Boolean OK = true;
+            Int32 StaffId = 2;
+            Found = aStaff.Find(StaffId);
+            if (aStaff.StaffPhoneNumber != "07313954875")
+        }
     }
 }
 

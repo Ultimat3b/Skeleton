@@ -101,19 +101,28 @@ namespace ClassLibrary
                 mStaffSalary = value;
             }
         }
-        public DateTime StaffStartTime
+        public DateTime StaffStartDate
         {
             get
             {
-                return mStaffStartTime;
+                return StaffStartDate;
             }
             set
             {
-                mStaffStartTime = value;
+                StaffStartDate = value;
             }
         }
         public bool Find(int staff_Id)
         {
+            mStaffId = 2;
+            mStaffFirstName = "Steve";
+            mStaffSurname = "Gates";
+            mStaffPhoneNumber = "07313954875";
+            mStaffEmail = "SteveGates@gmail.com";
+            mDateAdded = Convert.ToDateTime("27/04/2023");
+            mStaffSalary = 27000;
+            mActive = true;
+
             return true;
         }
     }

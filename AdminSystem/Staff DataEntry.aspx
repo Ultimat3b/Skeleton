@@ -17,6 +17,8 @@
             <asp:Label ID="lblstaff_id" runat="server" Text="Staff ID:" width="122px"></asp:Label>
 &nbsp;&nbsp;
             <asp:TextBox ID="txtStaff_id" runat="server"></asp:TextBox>
+&nbsp;
+            <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" Text="Find" />
             <br />
             <asp:Label ID="lblStaff_FirstName" runat="server" Text="Staff Firstname:" height="19px" width="122px"></asp:Label>
 &nbsp;&nbsp;
@@ -32,7 +34,7 @@
             <br />
              <asp:Label ID="lblStaff_email" runat="server" Text="Staff email:" height="19px" width="122px"></asp:Label>
 &nbsp;&nbsp;
-            <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
+            <asp:TextBox ID="txtStaffEmail" runat="server"></asp:TextBox>
             <br />
             <asp:Label ID="lblStaff_StartDate" runat="server" Text="Staff Start Date:" height="19px" width="122px"></asp:Label>
 &nbsp;&nbsp;
