@@ -139,6 +139,12 @@ namespace ClassLibrary
                 //record the error
                 Error = Error + "The Customer Email may not be blank : ";
             }
+            //if email is invalid
+            if (CustomerEmail.EndsWith("@gmail.com") == false)
+            {
+                //record the error
+                Error = Error + "The Customer Email is not valid, please enter a gmail account : ";
+            }
             //if the customer Email is greater than 50 characters
             if (CustomerEmail.Length > 50)
             {
