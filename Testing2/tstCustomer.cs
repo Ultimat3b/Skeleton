@@ -547,7 +547,7 @@ namespace Testing2
             //invoke the method
             Error = aCustomer.Valid(CustomerFirstName, CustomerSurname, CustomerEmail, DateAdded);
             //test to see that the result is correct
-            Assert.AreEqual(Error, ""); //saying there won't be an error message for this
+            Assert.AreNotEqual(Error, ""); //saying there won't be an error message for this
             //only use arenotequal if there will be an error message
         }
 
@@ -563,7 +563,7 @@ namespace Testing2
             //invoke the method
             Error = aCustomer.Valid(CustomerFirstName, CustomerSurname, CustomerEmail, DateAdded);
             //test to see that the result is correct
-            Assert.AreEqual(Error, "");
+            Assert.AreNotEqual(Error, "");
         }
 
         [TestMethod]
@@ -574,7 +574,7 @@ namespace Testing2
             String Error = "";
             //create some test data to pass to the method
             //about to override the parameter we declared in our test data section
-            string CustomerEmail = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"; //this should be ok
+            string CustomerEmail = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@gmail.com"; //this should be ok
             //invoke the method
             Error = aCustomer.Valid(CustomerFirstName, CustomerSurname, CustomerEmail, DateAdded);
             //test to see that the result is correct
@@ -588,7 +588,7 @@ namespace Testing2
             String Error = "";
             //create some test data to pass to the method
             //about to override the parameter we declared in our test data section
-            string CustomerEmail = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"; //this should be ok
+            string CustomerEmail = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@gmail.com"; //this should be ok
             //invoke the method
             Error = aCustomer.Valid(CustomerFirstName, CustomerSurname, CustomerEmail, DateAdded);
             //test to see that the result is correct
@@ -603,7 +603,7 @@ namespace Testing2
             String Error = "";
             //create some test data to pass to the method
             //about to override the parameter we declared in our test data section
-            string CustomerEmail = "aaaaaaaaaaaaaaaaaaaaaaaaaaa"; //this should be ok
+            string CustomerEmail = "aaaaaaaaaaaaaaaaa@gmail.com"; //this should be ok
             //invoke the method
             Error = aCustomer.Valid(CustomerFirstName, CustomerSurname, CustomerEmail, DateAdded);
             //test to see that the result is correct
@@ -619,7 +619,7 @@ namespace Testing2
             String Error = "";
             //create some test data to pass to the method
             //about to override the parameter we declared in our test data section
-            string CustomerEmail = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"; //this should trigger an error
+            string CustomerEmail = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@gmail.com"; //this should trigger an error
             //invoke the method
             Error = aCustomer.Valid(CustomerFirstName, CustomerSurname, CustomerEmail, DateAdded);
             //test to see that the result is correct
