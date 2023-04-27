@@ -19,7 +19,7 @@ public partial class _1_ConfirmDelete : System.Web.UI.Page
         //delete the record
         StockBook.Delete();
         //redirect back to the main page
-        Response.Redirect("Stock List.aspx");
+        Response.Redirect("StockList.aspx");
     }
 
 
@@ -27,5 +27,10 @@ public partial class _1_ConfirmDelete : System.Web.UI.Page
     {
         //get the number of the address to be deleted from the session object
         StockID = Convert.ToInt32(Session["StockID"]);
+    }
+
+    protected void btnNo_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("StockList.aspx");
     }
 }

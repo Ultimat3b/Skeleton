@@ -46,7 +46,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             //add the new record
             StockList.Add();
             //navigate to the viewer page
-            Response.Redirect("Stock List.aspx");
+            Response.Redirect("StockList.aspx");
         }
         else
         {
