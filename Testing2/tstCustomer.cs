@@ -123,11 +123,11 @@ namespace Testing2
             //bool variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            int CustomerId = 2;
+            int CustomerId = 10;
             //invoke the method
             found = aCustomer.Find(CustomerId);
             //check the Customer Id
-            if (aCustomer.CustomerId != 2) //checks if record 2 == customer id property or value in this place is also 2
+            if (aCustomer.CustomerId != 10) //checks if record 2 == customer id property or value in this place is also 2
             {
                 OK = false;
             }
@@ -147,11 +147,11 @@ namespace Testing2
             //bool variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            int CustomerId = 2;
+            int CustomerId = 10;
             //invoke the method
             found = aCustomer.Find(CustomerId);
             //check the property
-            if (aCustomer.CustomerFirstName != "Cheryl")
+            if (aCustomer.CustomerFirstName != "Jamie")
             {
                 OK = false;
             }
@@ -169,11 +169,11 @@ namespace Testing2
             //bool variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            int CustomerId = 2;
+            int CustomerId = 10;
             //invoke the method
             found = aCustomer.Find(CustomerId);
             //check the property
-            if (aCustomer.CustomerSurname != "Perkins")
+            if (aCustomer.CustomerSurname != "Mupenyu")
             {
                 OK = false;
             }
@@ -191,11 +191,11 @@ namespace Testing2
             //bool variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            int CustomerId = 2;
+            int CustomerId = 10;
             //invoke the method
             found = aCustomer.Find(CustomerId);
             //check the property
-            if (aCustomer.CustomerEmail != "monalisa97@gmail.com") //checks at record 21 to see if customer email property is "t.shoniwa@gmail.com"
+            if (aCustomer.CustomerEmail != "j.mupe@gmail.com") //checks at record 21 to see if customer email property is "t.shoniwa@gmail.com"
             {
                 OK = false;
             }
@@ -213,11 +213,11 @@ namespace Testing2
             //bool variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            int CustomerId = 2;
+            int CustomerId = 10;
             //invoke the method
             found = aCustomer.Find(CustomerId);
             //check the property
-            if (aCustomer.DateAdded != Convert.ToDateTime("10/02/2018"))
+            if (aCustomer.DateAdded != Convert.ToDateTime("21/04/2023"))
             {
                 OK = false;
             }
@@ -235,7 +235,7 @@ namespace Testing2
             //bool variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            int CustomerId = 2;
+            int CustomerId = 10;
             //invoke the method
             found = aCustomer.Find(CustomerId);
             //check the property that correlates to the specified customer Id

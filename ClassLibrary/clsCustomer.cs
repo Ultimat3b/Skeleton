@@ -174,6 +174,7 @@ namespace ClassLibrary
 
         public bool Find(int CustomerId)
         {
+            //String Error = "";
  
             //create an instance of the data connection
             clsDataConnection DB = new clsDataConnection();
@@ -198,6 +199,7 @@ namespace ClassLibrary
             else
             {
                 //return false indicating a problem
+                //Error = Error + "This record does not exist";
                 return false;
             }
         }

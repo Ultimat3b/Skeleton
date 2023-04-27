@@ -97,5 +97,165 @@ namespace Testing2
 
         }
 
+        //TESTING THE ADD, DELETE, UPDATE AND INSERT METHODS
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            //create an instance of the class we want to create
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            //create some test data to assign to the property 
+            //create the item of test data
+            clsCustomer TestItem = new clsCustomer();
+            //var to store the primary key
+            Int32 PrimaryKey = 0;
+            //set its properties
+            TestItem.CustomerId = 9;
+            TestItem.CustomerFirstName = "Jamie";
+            TestItem.CustomerSurname = "Mupenyu";
+            TestItem.CustomerEmail = "j.mupe@gmail.com";
+            TestItem.DateAdded = DateTime.Now.Date;
+            TestItem.ReturnCustomer = true;
+            //set this address to the test data
+            AllCustomers.ThisCustomer = TestItem;
+            //add the record
+            PrimaryKey = AllCustomers.Add();
+            //set the primary key of the test data
+            TestItem.CustomerId = PrimaryKey;
+            //find the record
+            AllCustomers.ThisCustomer.Find(PrimaryKey);
+            //test to see that the two values are the same
+            Assert.AreEqual(AllCustomers.ThisCustomer, TestItem);
+        }
+
+        [TestMethod]
+        public void UpdateMethodOK()
+        {
+            //create an instance of the class we want to create
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            //create some test data to assign to the property 
+            //create the item of test data
+            clsCustomer TestItem = new clsCustomer();
+            //var to store the primary key
+            Int32 PrimaryKey = 0;
+            //set its properties
+            TestItem.CustomerFirstName = "Jamie";
+            TestItem.CustomerSurname = "Mupenyu";
+            TestItem.CustomerEmail = "j.mupe@gmail.com";
+            TestItem.DateAdded = DateTime.Now.Date;
+            TestItem.ReturnCustomer = true;
+            //set this address to the test data
+            AllCustomers.ThisCustomer = TestItem;
+            //add the record
+            PrimaryKey = AllCustomers.Add();
+            //set the primary key of the test data
+            TestItem.CustomerId = PrimaryKey;
+            //modify the test data
+            TestItem.CustomerFirstName = "James";
+            TestItem.CustomerSurname = "Mupenyu";
+            TestItem.CustomerEmail = "jay.mupe@gmail.com";
+            TestItem.DateAdded = DateTime.Now.Date;
+            TestItem.ReturnCustomer = false;
+            //set the record based on the new test data
+            AllCustomers.ThisCustomer = TestItem;
+            //update the record
+            AllCustomers.Update();
+            //find the record
+            AllCustomers.ThisCustomer.Find(PrimaryKey);
+            //test to see that the two values are the same
+            Assert.AreEqual(AllCustomers.ThisCustomer, TestItem);
+        }
+
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            //create an instance of the class we want to create
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            //create some test data to assign to the property 
+            //create the item of test data
+            clsCustomer TestItem = new clsCustomer();
+            //var to store the primary key
+            Int32 PrimaryKey = 0;
+            //set its properties
+            TestItem.CustomerFirstName = "Jamie";
+            TestItem.CustomerSurname = "Mupenyu";
+            TestItem.CustomerEmail = "j.mupe@gmail.com";
+            TestItem.DateAdded = DateTime.Now.Date;
+            TestItem.ReturnCustomer = true;
+            //set this address to the test data
+            AllCustomers.ThisCustomer = TestItem;
+            //add the record
+            PrimaryKey = AllCustomers.Add();
+            //set the primary key of the test data
+            TestItem.CustomerId = PrimaryKey;
+            //find the record
+            AllCustomers.ThisCustomer.Find(PrimaryKey);
+            //delete the record
+            AllCustomers.Delete();
+            //now find the record
+            Boolean found = AllCustomers.ThisCustomer.Find(PrimaryKey);
+            //test to see that the two values are the same
+            Assert.IsFalse(found);
+        }
+
+        [TestMethod]
+        public void ReportBySurnameOK()
+        {
+            //create an instance of the class containing unfiltered results
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            //create an intsance of the filtered data
+            clsCustomerCollection FilteredCustomers = new clsCustomerCollection();
+            //apply a blank string (should return all records)
+            FilteredCustomers.ReportBySurname("");
+            //test to see that the two values are the same
+            Assert.AreEqual(AllCustomers.Count, FilteredCustomers.Count);
+        }
+
+        [TestMethod]
+        public void ReportBySurnameNoneFound()
+        {
+            //create an instance of the class containing unfiltered results
+            clsCustomerCollection FilteredCustomers = new clsCustomerCollection();
+            //apply a Surname that doesn't exist
+            FilteredCustomers.ReportBySurname("xxx xxx");
+            //test to see that there are no records
+            Assert.AreEqual(0, FilteredCustomers.Count);
+
+        }
+
+        [TestMethod]
+        public void ReportBySurnameTestDataFound()
+        {
+            //create an instance of the class containing unfiltered results
+            clsCustomerCollection FilteredCustomers = new clsCustomerCollection();
+            //var to store outcome
+            Boolean OK = true;
+            //apply a Customer surname that doesn't exist
+            FilteredCustomers.ReportBySurname("zzzz");
+            //check that the correct number of records are found
+            if (FilteredCustomers.Count == 2)
+            {
+
+                //check that the first record is id 27 and check that the second record is id 28
+                if (FilteredCustomers.CustomerList[0].CustomerId != 27 && FilteredCustomers.CustomerList[1].CustomerId != 28)
+                {
+                    OK = false;
+                }
+                 /*
+                //check that the second record is id 28
+                if (FilteredCustomers.CustomerList[1].CustomerId != 28)
+                {
+                    OK = false;
+                }*/
+            }
+            else
+            {
+                OK = false;
+            }
+            //test to see that there are no records
+            Assert.IsTrue(OK);
+
+
+        }
+
     }
 }
