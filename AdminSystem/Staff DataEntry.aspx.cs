@@ -8,9 +8,31 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 StaffID;
     protected void Page_Load(object sender, EventArgs e)
     {
+        StaffID = Convert.ToInt32(Session["StaffID"]);
+        if (IsPostBack == false)
+        {
+            if (StaffID != 1)
+            {
+                DisplayStaff();
+            }
+        }
+    }
 
+    void DisplayStaff()
+    {
+        clsStaffCollection staffCollection = new clsStaffCollection();
+        staffCollection.ThisStaff.Find(StaffID);
+
+        txtStaffFirstname.Text = staffCollection.ThisStaff.StaffFirstName;
+        txtSurname.Text = staffCollection.ThisStaff.StaffSurname;
+        txtStaffEmail.Text = staffCollection.ThisStaff.StaffEmail;
+        txtphoneNumber.Text = staffCollection.ThisStaff.StaffPhoneNumber.ToString();
+        txtStartDate.Text = staffCollection.ThisStaff.StaffStartDate.ToString();
+        txtSalary.Text = staffCollection.ThisStaff.StaffSalary.ToString();
+        chkActive.Checked = staffCollection.ThisStaff.Active;
     }
 
     protected void btnOk_Click(object sender, EventArgs e)
@@ -48,6 +70,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         {
             lblError.Text = Error;
         }
+        
     }
 
     protected void btnFind_Click(object sender, EventArgs e)

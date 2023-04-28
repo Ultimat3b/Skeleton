@@ -516,6 +516,16 @@ namespace Testing1
         }
 
         [TestMethod]
+        public void StaffSalaryExtremeMax()
+        {
+            clsStaff aStaff = new clsStaff();
+            String Error = "";
+            string StaffSalary = "500000000";
+            Error = aStaff.Valid(StaffFirstName, StaffSurname, StaffEmail, StaffPhoneNumber, StaffStartDate, StaffSalary, Active);
+            Assert.AreNotEqual(Error, "");
+        }
+
+        [TestMethod]
         public void TestMethod1()
         {
             clsStaff aStaff = new clsStaff();

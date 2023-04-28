@@ -9,13 +9,20 @@ namespace ClassLibrary
         clsStaff mThisStaff = new clsStaff();
 
         public clsStaffCollection()
+        { 
+
+            clsDataConnection DB = new clsDataConnection();
+            DB.Execute("sproc_tblStaff_SelectAll");
+            PopulateArray(DB);
+            
+        }
+
+        void PopulateArray(clsDataConnection DB)
         {
             Int32 Index = 0;
             Int32 RecordCount = 0;
 
-            clsDataConnection DB = new clsDataConnection();
-            DB.Execute("sproc_tblStaff_SelectAll");
-
+            mStaffList = new List<clsStaff>();
             while (Index < RecordCount)
             {
                 clsStaff aStaff = new clsStaff();
@@ -62,6 +69,13 @@ namespace ClassLibrary
             DB.Execute("sproc_tblStaff_Update");
         }
 
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@staff_Id", mThisStaff.StaffId);
+            DB.Execute("sproc_tblStaff_Delete");
+        }
+
         public List<clsStaff> StaffList
         {
             get
@@ -96,6 +110,13 @@ namespace ClassLibrary
             }
         }
 
+        public void ReporByFirstName(string StaffFirstName)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@Staff_FirstName", StaffFirstName);
+            DB.Execute("sproc_tblStaff_FilterByFirstName");
+            PopulateArray(DB);
+        }
 
-    }
+       
 }

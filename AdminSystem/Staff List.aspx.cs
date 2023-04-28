@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 
 public partial class _1_List : System.Web.UI.Page
 {
+    
     protected void Page_Load(object sender, EventArgs e)
     {
         if (IsPostBack == false)
@@ -28,7 +29,7 @@ public partial class _1_List : System.Web.UI.Page
 
     protected void btnAdd_Click(object sender, EventArgs e)
     {
-        Session["StaffId"] = -1;
+        Session["StaffID"] = -1;
 
         Response.Redirect("Staff DataEntry");
     }
@@ -42,5 +43,40 @@ public partial class _1_List : System.Web.UI.Page
             Session["StaffID"] = StaffID;
             Response.Redirect("Staff DataEntry.aspx");
         }
+    }
+
+    protected void btnDelete_Click(object sender, EventArgs e)
+    {
+        Int32 StaffID;
+        if (lstStaffList.SelectedIndex != -1)
+        {
+            StaffID = Convert.ToInt32(lstStaffList.SelectedValue);
+            Session["StaffID"] = StaffID;
+            Response.Redirect("Staff DataEntry.aspx");
+        }
+        else
+        {
+            lblError.Text = "Please select a record to delete from the list";
+        }
+    }
+
+    protected void btnApply_Click(object sender, EventArgs e)
+    {
+        clsStaffCollection Staff = new clsStaffCollection();
+        Staff.ReporByFirstName(txtFilter.Text);
+        lstStaffList.DataSource = Staff.StaffList;
+        lstStaffList.DataValueField = "StaffID";
+        lstStaffList.DataTextField = "Staff_FirstName";
+        lstStaffList.DataBind();
+    }
+
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        clsStaffCollection Staff = new clsStaffCollection();
+        Staff.ReporByFirstName("");
+        txtFilter.Text = "";
+        lstStaffList.DataSource = Staff.StaffList;
+        lstStaffList.DataTextField = "Staff_FirstName";
+        lstStaffList.DataBind();
     }
 }
