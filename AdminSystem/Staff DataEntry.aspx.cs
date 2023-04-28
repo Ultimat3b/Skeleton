@@ -18,19 +18,36 @@ public partial class _1_DataEntry : System.Web.UI.Page
         //create a new instance of clsStaff
         clsStaff aStaff = new clsStaff();
         //capture the staff name
-        aStaff.StaffId = Convert.ToInt32(txtStaff_id.Text);
-        aStaff.StaffFirstname = txtStaffFirstname.Text;
-        aStaff.StaffSurname = txtSurname.Text;
-        aStaff.StaffEmail = txtStaffEmail.Text;
-        aStaff.StaffPhoneNumber = txtphoneNumber.Text;
-        aStaff.StaffStartDate = Convert.ToDateTime(txtStartDate.Text);
-        aStaff.StaffSalary = (float)Convert.ToDouble(txtSalary.Text);
-        aStaff.Active = chkActive.Checked;
+        string StaffFirstName = txtStaffFirstname.Text;
+        string StaffSurname = txtSurname.Text;
+        string StaffEmail = txtStaffEmail.Text;
+        string StaffPhoneNumber = txtphoneNumber.Text;
+        string StaffStartDate = txtStartDate.Text;
+        string StaffSalary = txtSalary.Text;
+        string Error = "";
 
-        //store the data in the session object
-        Session["aStaff"] = aStaff;
-        //navigate to the viewer page
-        Response.Redirect("1Viewer.aspx");
+        Error = aStaff.Valid(StaffFirstName, StaffSurname, StaffEmail, StaffPhoneNumber, StaffStartDate, StaffSalary);
+        if (Error == "")
+        {
+            aStaff.StaffId = Convert.ToInt32(txtStaff_id.Text);
+            aStaff.StaffFirstName = txtStaffFirstname.Text;
+            aStaff.StaffSurname = txtSurname.Text;
+            aStaff.StaffEmail = txtStaffEmail.Text;
+            aStaff.StaffPhoneNumber = Convert.ToInt32(txtphoneNumber.Text);
+            aStaff.StaffStartDate = Convert.ToDateTime(txtStartDate.Text);
+            aStaff.StaffSalary = (float)Convert.ToDouble(txtSalary.Text);
+            aStaff.Active = chkActive.Checked;
+
+            clsStaffCollection StaffList = new clsStaffCollection();
+            //store the data in the session object
+            Session["aStaff"] = aStaff;
+            //navigate to the viewer page
+            Response.Redirect("Staff List.aspx");
+        }
+        else
+        {
+            lblError.Text = Error;
+        }
     }
 
     protected void btnFind_Click(object sender, EventArgs e)
@@ -42,10 +59,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
         Found = aStaff.Find(StaffId);
         if (Found == true)
         {
-            txtStaffFirstname.Text = aStaff.StaffFirstname;
+            txtStaffFirstname.Text = aStaff.StaffFirstName;
             txtSurname.Text = aStaff.StaffSurname;
             txtStaffEmail.Text = aStaff.StaffEmail;
-            txtphoneNumber.Text = aStaff.StaffPhoneNumber;
+            txtphoneNumber.Text = aStaff.StaffPhoneNumber.ToString();
             txtStartDate.Text = aStaff.StaffStartDate.ToString();
             txtSalary.Text = aStaff.StaffSalary.ToString();
             chkActive.Checked = aStaff.Active;
